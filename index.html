@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths MCQs Quiz</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" xintegrity="sha384-n8MV3yEaB+VxYFfAFrgFrgFbXDxYCKhF6w9/VSV0gdc/TjP7WJ" crossorigin="anonymous">
+    <!-- KaTeX JS for rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" xintegrity="sha384-EmS/HvS0BlGA+iXpSjL5l3mB1uFhR4sX/Y5L5uGjP5mB0f3h4z" crossorigin="anonymous"></script>
+
+    <style>
+        /* Base styling for Inter font and general body layout */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #e0f2fe, #e9d5ff); /* Tailwind blue-100 to purple-200 */
+        }
+        /* Styling for the main quiz container */
+        .container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            width: 100%;
+            max-width: 48rem; /* max-w-2xl */
+            transition: transform 0.3s ease-in-out;
+        }
+        .container:hover {
+            transform: scale(1.02); /* hover:scale-105 equivalent */
+        }
+        /* Styling for the main heading */
+        h1 {
+            font-size: 3rem; /* Increased size for main title */
+            font-weight: 900; /* Even bolder */
+            text-align: center;
+            color: #1f2937; /* text-gray-800 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.25); /* More prominent shadow */
+            line-height: 1.2; /* Adjust line height for multi-line title */
+        }
+        h1 .author-name {
+            font-weight: 600; /* font-semibold */
+            color: #1d4ed8; /* blue-700 */
+            display: block; /* To put it on a new line */
+            margin-top: 0.5rem; /* Small space above it */
+            font-size: 1.5rem; /* Smaller than main title, but clearly visible */
+            text-decoration: none; /* Remove default underline */
+            transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out; /* Smooth transition for effects */
+        }
+        h1 .author-name:hover {
+            color: #2563eb; /* Slightly lighter blue on hover */
+            text-shadow: 0 0 8px rgba(37, 99, 235, 0.5); /* Subtle glow effect */
+            text-decoration: underline; /* Underline on hover */
+        }
+        /* Generic text alignment and spacing */
+        .text-center {
+            text-align: center;
+        }
+        .space-y-6 > *:not(:last-child) {
+            margin-bottom: 1.5rem;
+        }
+        .space-y-4 > *:not(:last-child) { /* Added for options */
+            margin-bottom: 1rem;
+        }
+        .text-lg {
+            font-size: 1.125rem;
+        }
+        .text-md {
+            font-size: 1rem;
+        }
+        .text-gray-700 {
+            color: #374151;
+        }
+        .text-gray-600 {
+            color: #4b5563;
+        }
+        /* Primary button styling */
+        .btn-primary {
+            background-color: #2563eb; /* bg-blue-600 */
+            color: #ffffff;
+            font-weight: 700; /* font-bold */
+            padding: 0.75rem 1.5rem; /* py-3 px-6 */
+            border-radius: 9999px; /* rounded-full */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            outline: none;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #1d4ed8; /* hover:bg-blue-700 */
+            transform: scale(1.1); /* hover:scale-110 */
+        }
+        .btn-primary:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.5); /* focus:ring-4 focus:ring-blue-300 */
+        }
+        /* Secondary button styling */
+        .btn-secondary {
+            background-color: #9333ea; /* bg-purple-600 */
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            outline: none;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background-color: #7e22ce; /* hover:bg-purple-700 */
+            transform: scale(1.1);
+        }
+        .btn-secondary:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.5); /* focus:ring-4 focus:ring-purple-300 */
+        }
+        .ml-4 {
+            margin-left: 1rem;
+        }
+
+        /* Quiz screen layout elements */
+        .flex { display: flex; }
+        .justify-between { justify-content: space-between; }
+        .items-center { align-items: center; }
+        .mb-4 { margin-bottom: 1rem; }
+        .text-xl { font-size: 1.25rem; }
+        .font-semibold { font-weight: 600; }
+        .text-gray-800 { color: #1f2937; }
+        .text-3xl { font-size: 1.875rem; }
+        .font-bold { font-weight: 700; }
+        .text-green-600 { color: #16a34a; }
+        .text-red-500 { color: #ef4444; }
+
+        /* Animation for timer when low */
+        .animate-pulse {
+            animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        /* Question background and padding */
+        .bg-blue-50 {
+            background-color: #eff6ff;
+        }
+        .p-6 { padding: 1.5rem; }
+        /* Common rounded corners and shadows */
+        .rounded-lg { border-radius: 0.5rem; }
+        .shadow-inner { box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); }
+        .font-medium { font-weight: 500; }
+        .text-gray-900 { color: #111827; }
+        .leading-relaxed { line-height: 1.625; }
+
+        /* Options button styling */
+        .option-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem; /* p-4 */
+            border-radius: 0.5rem; /* rounded-lg */
+            border-width: 2px; /* border-2 */
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            background-color: #ffffff; /* bg-white */
+            border-color: #d1d5db; /* border-gray-300 */
+            outline: none;
+        }
+        .option-button:hover:not(:disabled) {
+            background-color: #f9fafb; /* hover:bg-gray-50 */
+            border-color: #60a5fa; /* hover:border-blue-400 */
+        }
+        /* Style for selected option */
+        .option-button.selected {
+            background-color: #dbeafe; /* bg-blue-200 */
+            border-color: #3b82f6; /* border-blue-500 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* shadow-md */
+        }
+        /* Style for correct option feedback */
+        .option-button.correct-feedback {
+            background-color: #dcfce7; /* bg-green-100 */
+            border-color: #22c55e; /* border-green-500 */
+        }
+        /* Style for incorrect option feedback */
+        .option-button.incorrect-feedback {
+            background-color: #fee2e2; /* bg-red-100 */
+            border-color: #ef4444; /* border-red-500 */
+        }
+
+        .option-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        /* For option labels (A., B., etc.) */
+        .option-label {
+            font-weight: 600; /* font-semibold */
+            color: #374151; /* text-gray-700 */
+            margin-right: 0.5rem; /* mr-2 */
+        }
+
+        /* Next/Finish Button styling */
+        .btn-action {
+            background-color: #10b981; /* bg-green-600 */
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.75rem 2rem; /* py-3 px-8 */
+            border-radius: 9999px; /* rounded-full */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            outline: none;
+            border: none;
+        }
+        .btn-action:hover:not(:disabled) {
+            background-color: #059669; /* hover:bg-green-700 */
+            transform: scale(1.05); /* hover:scale-105 */
+        }
+        .btn-action:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.5); /* focus:ring-4 focus:ring-green-300 */
+        }
+        .btn-action:disabled {
+            background-color: #9ca3af; /* disabled:bg-gray-400 */
+            cursor: not-allowed;
+        }
+        .mt-6 { margin-top: 1.5rem; }
+        .mt-4 { margin-top: 1rem; } /* Added for explanation container */
+
+
+        /* Result screen styling */
+        .text-3xl { font-size: 1.875rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-blue-600 { color: #2563eb; }
+        .font-extrabold { font-weight: 800; }
+
+        /* Modal styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(75, 85, 99, 0.75); /* bg-gray-600 bg-opacity-75 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            padding: 1.5rem; /* p-6 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
+            max-width: 24rem; /* max-w-sm */
+            width: 100%;
+            text-align: center;
+        }
+        .modal-content p {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            color: #1f2937; /* text-gray-800 */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        .modal-content button {
+            background-color: #2563eb; /* bg-blue-600 */
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.5rem 1rem; /* py-2 px-4 */
+            border-radius: 9999px; /* rounded-full */
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+        .modal-content button:hover {
+            background-color: #1d4ed8; /* hover:bg-blue-700 */
+        }
+
+        /* KaTeX specific styling to ensure proper rendering within flow */
+        .katex-display {
+            display: block; /* Ensure block-level math is properly centered and spaced */
+            text-align: center;
+            margin: 1em 0;
+            overflow-x: auto; /* Allow horizontal scrolling for wide equations */
+        }
+        .katex {
+            font-size: 1.1em; /* Adjust based on your preference */
+            line-height: normal; /* Ensure line height doesn't cause clipping */
+        }
+        /* Explanation container styling */
+        .bg-gray-100 {
+            background-color: #f3f4f6;
+        }
+        .p-4 { padding: 1rem; }
+        .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+        .text-sm { font-size: 0.875rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+
+        /* Styling for GitHub and Notes link section */
+        .links-section {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb; /* Subtle top border */
+            text-align: center; /* Center the entire section content */
+        }
+        .links-heading {
+            font-size: 0.9rem; /* Smaller font size */
+            font-weight: 700; /* Bold */
+            color: #4b5563; /* Gray-700 */
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em; /* Slightly spaced out letters */
+            text-transform: uppercase; /* Uppercase for subtle emphasis */
+        }
+        .contact-link {
+            display: block; /* Ensures link takes full width for centering */
+            font-size: 1rem;
+            color: #2563eb; /* Blue-600 */
+            text-decoration: none;
+            transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+            margin-bottom: 0.5rem; /* Space between links */
+        }
+        .contact-link:hover {
+            color: #1d4ed8; /* Darker blue on hover */
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <div id="quiz-app" class="container">
+        <!-- Quiz title -->
+        <h1>
+            ADVANCED MATHS MCQS FOR NUST ENTRANCE TEST (ENGINEERING)
+            <a href="https://www.instagram.com/safi_imran2006/" target="_blank" rel="noopener noreferrer" class="author-name">by Safee Imran</a>
+        </h1>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="text-center space-y-6">
+            <p class="text-lg text-gray-700">This is a one time preperation of Advanced Mathematics for all NUST aspirants 🎓!</p>
+            <p class="text-md text-gray-600">Each question has a 40-second timer. There are 799 MCQs in total</p>
+            <button id="start-quiz-btn" class="btn-primary">
+                Start Quiz
+            </button>
+            <button id="randomize-mcqs-btn" class="btn-secondary ml-4">
+                Randomize Questions
+            </button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="space-y-6 hidden">
+            <div class="flex justify-between items-center mb-4">
+                <div id="question-count" class="text-xl font-semibold text-gray-800">
+                    Question 1 / 49
+                </div>
+                <div id="timer" class="text-3xl font-bold text-green-600">
+                    40s
+                </div>
+            </div>
+
+            <div class="bg-blue-50 p-6 rounded-lg shadow-inner">
+                <p id="question-text" class="text-xl font-medium text-gray-900 leading-relaxed">
+                    <!-- Question text with KaTeX rendering -->
+                </p>
+            </div>
+
+            <div id="options-container" class="space-y-4">
+                <!-- Options buttons will be dynamically inserted here -->
+            </div>
+
+            <!-- NEW ELEMENT FOR EXPLANATION -->
+            <div id="explanation-container" class="bg-gray-100 p-4 rounded-lg shadow-sm mt-4 text-gray-800 hidden">
+                <p class="font-semibold mb-2">Explanation:</p>
+                <p id="explanation-text" class="text-sm leading-relaxed"></p>
+            </div>
+
+            <div class="text-center mt-6">
+                <button id="next-question-btn" class="btn-action" disabled>
+                    Next Question
+                </button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="text-center space-y-6 hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Quiz Completed!</h2>
+            <p class="text-2xl text-gray-700">Your Score: <span class="font-extrabold text-blue-600">0 / 0</span></p>
+            <button id="play-again-btn" class="btn-primary">
+                Play Again
+            </button>
+        </div>
+
+        <!-- Links Section -->
+        <div class="links-section">
+            <p class="links-heading">Connect with the Creator & Access Resources</p>
+            <a href="https://github.com/SafeeImran/NUST-NET-MATHS" target="_blank" rel="noopener noreferrer" class="contact-link">
+                GitHub: github.com/SafeeImran
+            </a>
+            <a href="https://www.instagram.com/safi_imran2006/" target="_blank" rel="noopener noreferrer" class="contact-link">
+                Instagram: @safi_imran2006
+            </a>
+            <a href="https://drive.google.com/drive/folders/11_DaMxP6joYwIpGJnBe3StyBxtAFq3p3?usp=drive_link" target="_blank" rel="noopener noreferrer" class="contact-link">
+                All Notes: Drive Folder
+            </a>
+        </div>
+    </div>
+
+    <!-- Custom Modal Structure -->
+    <div id="custom-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <p id="modal-message"></p>
+            <button id="modal-ok-btn">OK</button>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import the MCQs data
+        // IMPORTANT: Ensure your 'mcqs.js' file exports an array named 'mcqs'.
+        // If you have multiple files (e.g., differential_equations_mcqs.js),
+        // you'll need to create a main 'mcqs.js' that combines them:
+        //
+        // Example for mcqs.js:
+        // import { mcqs as diffEqMcqs } from './differential_equations_mcqs.js';
+        // import { mcqs as diffMcqs } from './differentiation_mcqs.js';
+        // // ... import other categories
+        //
+        // export const mcqs = [
+        //     ...diffEqMcqs,
+        //     ...diffMcqs,
+        //     // ... spread other category arrays here
+        // ];
+        //
+        // Make sure the combined 'mcqs' array contains an 'explanation' field for each question object.
+        import { mcqs } from './mcqs.js';
+
+        // --- DOM Elements ---
+        const startScreen = document.getElementById('start-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const randomizeMcqsBtn = document.getElementById('randomize-mcqs-btn');
+        const questionCountElem = document.getElementById('question-count');
+        const timerElem = document.getElementById('timer');
+        const questionTextElem = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const finalScoreElem = document.getElementById('final-score');
+        const playAgainBtn = document.getElementById('play-again-btn');
+        const customModal = document.getElementById('custom-modal');
+        const modalMessageElem = document.getElementById('modal-message');
+        const modalOkBtn = document.getElementById('modal-ok-btn');
+
+        // New DOM elements for explanation
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationTextElem = document.getElementById('explanation-text');
+
+
+        // --- Quiz State Variables ---
+        let currentQuestionIndex = 0;
+        let shuffledMcqs = [];
+        let timeRemaining = 40;
+        let selectedOption = null;
+        let score = 0;
+        let timerInterval;
+        let feedbackTimeout; // To hold the timeout for showing feedback
+
+        // --- Utility Functions ---
+
+        // Fisher-Yates shuffle algorithm
+        const shuffleArray = (array) => {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        };
+
+        // Custom Modal Function (replaces alert/confirm)
+        const showCustomModal = (message) => {
+            modalMessageElem.textContent = message;
+            customModal.classList.remove('hidden');
+        };
+
+        // Renders a string containing LaTeX into HTML using KaTeX.
+        // It correctly handles both inline ($...$) and display ($$...$$) math.
+        const renderMathString = (text) => {
+            // Function to render a single math block
+            const renderHtmlBlock = (match, type) => {
+                try {
+                    // Extract the math content by slicing off the delimiters
+                    const mathContent = match.slice(type.length, -type.length); // Adjusted slice to remove delimiters
+                    return katex.renderToString(mathContent, {
+                        throwOnError: false,
+                        displayMode: type === '$$' // Set displayMode for $$ blocks
+                    });
+                } catch (error) {
+                    console.error("KaTeX rendering error for:", match, error);
+                    return match; // Fallback to original text on error
+                }
+            };
+
+            let processedText = text;
+            // Process display math first to avoid issues with inline $ signs within them
+            processedText = processedText.replace(/\$\$(.*?)\$\$/g, (match) => renderHtmlBlock(match, '$$'));
+            // Process inline math
+            processedText = processedText.replace(/\$(.*?)\$/g, (match) => renderHtmlBlock(match, '$'));
+            return processedText;
+        };
+
+
+        // --- Quiz Logic Functions ---
+
+        // Function to start the quiz
+        const startQuiz = () => {
+            shuffledMcqs = shuffleArray([...mcqs]); // Shuffle a fresh copy of MCQs
+            currentQuestionIndex = 0;
+            score = 0;
+            displayQuestion();
+            startScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            resultScreen.classList.add('hidden');
+        };
+
+        // Function to display the current question and options
+        const displayQuestion = () => {
+            clearTimeout(feedbackTimeout); // Clear any pending feedback timeout
+            clearInterval(timerInterval); // Clear any existing timer
+            timeRemaining = 40; // Reset timer for new question
+            selectedOption = null; // Clear selected option
+            nextQuestionBtn.disabled = true; // Disable next button until an option is selected
+
+            // Hide and clear explanation for new question
+            explanationContainer.classList.add('hidden');
+            explanationTextElem.innerHTML = '';
+
+            const currentQuestion = shuffledMcqs[currentQuestionIndex];
+            questionCountElem.textContent = `Question ${currentQuestionIndex + 1} / ${shuffledMcqs.length}`;
+            
+            // Render question text with KaTeX
+            questionTextElem.innerHTML = renderMathString(currentQuestion.question);
+
+            optionsContainer.innerHTML = ''; // Clear previous options
+
+            // Create and append option buttons
+            Object.keys(currentQuestion.options).forEach(key => {
+                const optionButton = document.createElement('button');
+                optionButton.classList.add('option-button');
+                optionButton.dataset.option = key;
+                
+                // Construct option HTML with KaTeX rendering for the option text
+                optionButton.innerHTML = `<span class="option-label">${key.toUpperCase()}.</span>${renderMathString(currentQuestion.options[key])}`;
+                
+                optionButton.addEventListener('click', () => handleOptionClick(optionButton, key));
+                optionsContainer.appendChild(optionButton);
+            });
+
+            startTimer(); // Start timer for the current question
+        };
+
+        // Function to start the countdown timer
+        const startTimer = () => {
+            clearInterval(timerInterval); // Clear any previous timer
+            timerElem.classList.remove('text-red-500', 'animate-pulse');
+            timerElem.classList.add('text-green-600');
+            timerElem.textContent = `${timeRemaining}s`;
+
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                timerElem.textContent = `${timeRemaining}s`;
+
+                if (timeRemaining <= 10) {
+                    timerElem.classList.add('text-red-500', 'animate-pulse');
+                    timerElem.classList.remove('text-green-600');
+                }
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    // Automatically move to next question if time runs out, providing no selection feedback
+                    // The explanation will still be shown for timed-out questions if available.
+                    handleFeedbackAndNextQuestion(false); 
+                }
+            }, 1000);
+        };
+
+        // Function to handle option clicks and provide immediate feedback
+        const handleOptionClick = (clickedButton, optionKey) => {
+            clearInterval(timerInterval); // Stop the timer immediately on selection
+
+            // Disable all option buttons to prevent further clicks
+            document.querySelectorAll('.option-button').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('selected'); // Remove any prior 'selected' state
+            });
+
+            selectedOption = optionKey; // Store the selected option
+
+            const currentQuestion = shuffledMcqs[currentQuestionIndex];
+            const correctAnswer = currentQuestion.correctAnswer;
+
+            // Highlight the selected option
+            clickedButton.classList.add('selected');
+
+            // Provide immediate feedback
+            if (selectedOption === correctAnswer) {
+                clickedButton.classList.add('correct-feedback'); // Green for correct
+                score++; // Increment score immediately
+            } else {
+                clickedButton.classList.add('incorrect-feedback'); // Red for incorrect
+
+                // Also highlight the correct answer in green
+                document.querySelectorAll('.option-button').forEach(btn => {
+                    if (btn.dataset.option === correctAnswer) {
+                        btn.classList.add('correct-feedback');
+                    }
+                });
+            }
+
+            nextQuestionBtn.disabled = false;
+
+            // Display the explanation
+            if (currentQuestion.explanation) {
+                explanationTextElem.innerHTML = renderMathString(currentQuestion.explanation);
+                explanationContainer.classList.remove('hidden');
+            }
+
+            // Set a timeout to proceed to the next question after a brief delay
+            feedbackTimeout = setTimeout(() => {
+                handleNextQuestion();
+            }, 3000); // 3-second delay to show feedback and explanation
+        };
+
+        // Helper function for handling timer-out or direct submission.
+        // If an option was selected, feedback is already handled by handleOptionClick.
+        // If time runs out, this function is called directly.
+        const handleFeedbackAndNextQuestion = (optionSelected = true) => {
+            if (!optionSelected) {
+                // If time ran out without a selection, disable all options and show correct answer
+                document.querySelectorAll('.option-button').forEach(btn => {
+                    btn.disabled = true;
+                    if (btn.dataset.option === shuffledMcqs[currentQuestionIndex].correctAnswer) {
+                        btn.classList.add('correct-feedback');
+                    }
+                });
+                // Display explanation if available for timed-out questions
+                if (shuffledMcqs[currentQuestionIndex].explanation) {
+                    explanationTextElem.innerHTML = renderMathString(shuffledMcqs[currentQuestionIndex].explanation);
+                    explanationContainer.classList.remove('hidden');
+                }
+                nextQuestionBtn.disabled = false; // Enable next button
+            }
+            
+            // Proceed after a short delay
+            feedbackTimeout = setTimeout(() => {
+                handleNextQuestion();
+            }, 3000); // 3-second delay for timed-out questions to show answer/explanation
+        };
+
+
+        // Function to handle moving to the next question
+        const handleNextQuestion = () => {
+            clearInterval(timerInterval); // Ensure timer is stopped
+
+            // Move to the next question or end the quiz if all questions are answered
+            if (currentQuestionIndex < shuffledMcqs.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion(); // Display the next question
+            } else {
+                showResultScreen(); // Show the quiz results
+            }
+        };
+
+        // Function to display the quiz result screen
+        const showResultScreen = () => {
+            quizScreen.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+            finalScoreElem.textContent = `${score} / ${shuffledMcqs.length}`;
+        };
+
+        // Function to randomize MCQs and reset quiz state
+        const randomizeMcqs = () => {
+            shuffledMcqs = shuffleArray([...mcqs]); // Re-shuffle the original questions
+            currentQuestionIndex = 0;
+            score = 0;
+            clearInterval(timerInterval);
+            clearTimeout(feedbackTimeout); // Clear any pending timeout
+            timeRemaining = 40;
+            selectedOption = null;
+            
+            // Reset UI to start screen and clear/hide explanation
+            startScreen.classList.remove('hidden');
+            quizScreen.classList.add('hidden');
+            resultScreen.classList.add('hidden');
+            explanationContainer.classList.add('hidden');
+            explanationTextElem.innerHTML = '';
+            
+            showCustomModal("MCQs have been randomized! Click 'Start Quiz' to begin.");
+        };
+
+        // --- Event Listeners ---
+        startQuizBtn.addEventListener('click', startQuiz);
+        randomizeMcqsBtn.addEventListener('click', randomizeMcqs);
+        nextQuestionBtn.addEventListener('click', handleNextQuestion); // This button is now enabled after selection/timeout
+        playAgainBtn.addEventListener('click', startQuiz);
+        modalOkBtn.addEventListener('click', () => customModal.classList.add('hidden'));
+
+        // Initial shuffle when the page loads, so quiz can start right away.
+        window.addEventListener('load', () => {
+            shuffledMcqs = shuffleArray([...mcqs]);
+        });
+    </script>
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
